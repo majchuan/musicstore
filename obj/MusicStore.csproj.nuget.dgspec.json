@@ -1,28 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mark/Applications/DotNet/MusicStore/MusicStore.csproj": {}
+    "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj": {}
   },
   "projects": {
-    "/Users/mark/Applications/DotNet/MusicStore/MusicStore.csproj": {
+    "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mark/Applications/DotNet/MusicStore/MusicStore.csproj",
+        "projectUniqueName": "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj",
         "projectName": "MusicStore",
-        "projectPath": "/Users/mark/Applications/DotNet/MusicStore/MusicStore.csproj",
-        "packagesPath": "/Users/mark/.nuget/packages/",
-        "outputPath": "/Users/mark/Applications/DotNet/MusicStore/obj/",
+        "projectPath": "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj",
+        "packagesPath": "C:\\Users\\majin\\.nuget\\packages\\",
+        "outputPath": "J:\\VisualCodeWorkSpace\\musicstore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "/Users/mark/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\majin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -52,6 +56,10 @@
             "microsoft.entityframeworkcore": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "microsoft.entityframeworkcore.sqlserver": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -73,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.403/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

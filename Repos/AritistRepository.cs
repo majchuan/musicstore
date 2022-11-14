@@ -1,4 +1,7 @@
-public class Aritistrepository : GenericRepository<Aritist>, IGenericRepository<Aritist>
+public class Artistrepository : GenericRepository<Artist>, IGenericRepository<Artist>
 {
+    public Artistrepository(ApplicationContext ac) : base(ac){
+    }
+
     
 }

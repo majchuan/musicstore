@@ -6,7 +6,7 @@ public class GenericRepository<T> : IGenericRepository<T>  where T: class
         this.ac = ac ; 
     }
 
-    public T GetById(int id)
+    public T GetById(long id)
     {
         return ac.Set<T>().Find(id);
     }
@@ -37,8 +37,12 @@ public class GenericRepository<T> : IGenericRepository<T>  where T: class
     }
 
     public void RemoveRange(IEnumerable<T> t)
-    
     {
         ac.Set<T>().RemoveRange(t);
+    }
+
+    public void Save()
+    {
+        ac.SaveChanges();
     }
 }

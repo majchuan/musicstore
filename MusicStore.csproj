@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="microsoft.entityframeworkcore" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 

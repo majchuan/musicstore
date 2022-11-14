@@ -4,5 +4,5 @@ public class Album : BaseModel
     public int YearRelease{get;set;}
     public ICollection<Song> Songs{get;set;}
 
-    public Aritist Aritist {get;set;}
+    public Artist Artist {get;set;}
 }
