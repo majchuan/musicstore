@@ -37,6 +37,7 @@ public class GenericRepository<T> : IGenericRepository<T>  where T: class
     }
 
     public void RemoveRange(IEnumerable<T> t)
+    
     {
         ac.Set<T>().RemoveRange(t);
     }
