@@ -7,22 +7,22 @@ namespace MusicStore.Controllers;
 public class ArtistController : ControllerBase
 {
     private readonly ILogger<ArtistController> _logger;
-    private Artistrepository _ar;
+    private readonly IUnitOfWork _unitOfWork ; 
 
-    public ArtistController(ApplicationContext ac, ILogger<ArtistController> logger)
+    public ArtistController(IUnitOfWork unitOfWork, ILogger<ArtistController> logger)
     {
         _logger = logger;
-        _ar = new Artistrepository(ac);
+        _unitOfWork = unitOfWork;
     }
 
     [HttpGet(Name = "GetArtists")]
     public IActionResult GetArtists()
     {
-        var artists = _ar.GetAll();
+        var artists = _unitOfWork.ArtistRepository.GetAll();
         if(artists == null){
             return NotFound();
         }
-       return Ok(_ar.GetAll());
+       return Ok(artists);
     }
 
     [HttpGet(Name="GetArtist")]
@@ -31,34 +31,66 @@ public class ArtistController : ControllerBase
         if(id == null){
             return BadRequest();
         }
-        return Ok(_ar.GetById(id.Value)) ;
+        return Ok(_unitOfWork.ArtistRepository.GetById(id.Value)) ;
     }
 
+    public IActionResult GetAblumsByArtist(Artist artist)
+    {
+        if(artist == null){
+            return BadRequest();
+        }
+
+        return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id).Albums);
+    }
+
+    public IActionResult GetSongsByArtist(Artist artist)
+    {
+        if(artist == null){
+            return BadRequest();
+        }
+
+        var albums =_unitOfWork.ArtistRepository.GetById(artist.Id).Albums;
+        var songs = new List<Song>();
+        foreach(var album in albums)
+        {
+            songs.AddRange(album.Songs);
+        }
+
+        return Ok(songs);
+    }
+
+    [HttpPost(Name="CreateArtist")]
     public IActionResult CreateArtist(Artist artist)
     {
-        _ar.Add(artist);
-        _ar.Save();
-        return Ok(_ar.Find(x => x.Name == artist.Name)) ;
+        if(_unitOfWork.ArtistRepository.ValidateArtist(artist)== false){
+            return BadRequest();
+        }
+        _unitOfWork.ArtistRepository.Add(artist);
+        _unitOfWork.Save();
+        return Ok(_unitOfWork.ArtistRepository.Find(x => x.Name == artist.Name)) ;
     }
-
+    [HttpDelete(Name="DeleteArtist")]
     public IActionResult DeleteArtist(int? id)
     {
         if(id == null){
             return BadRequest();
         }
-        _ar.Remove(_ar.GetById(id.Value));
+        _unitOfWork.ArtistRepository.Remove(_unitOfWork.ArtistRepository.GetById(id.Value));
         return Ok() ;
     }
-
-    public IActionResult UpdateAritist(Artist artist)
+    [HttpPut(Name="UpdateArtist")]
+    public IActionResult UpdateArtist(Artist artist)
     {
-        var artistUpdate = _ar.GetById(artist.Id);
+        if(_unitOfWork.ArtistRepository.ValidateArtist(artist) == false){
+            return BadRequest();
+        }
+        var artistUpdate = _unitOfWork.ArtistRepository.GetById(artist.Id);
         if(artistUpdate != null){
             artistUpdate.Name  = artist.Name;
             artistUpdate.Albums = artist.Albums;
-            _ar.Save();
+            _unitOfWork.Save();
         }
-        return Ok(_ar.GetById(artist.Id));
+        return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id));
     }
 
 }
