@@ -15,7 +15,7 @@ public class AlbumController : ControllerBase
         _unitOfWork = unitOfWork;
     }
 
-    [HttpGet(Name = "GetAlbum")]
+    [HttpGet("/albums",Name = "GetAlbum")]
     public IActionResult GetAlbums()
     {
         var albums= _unitOfWork.AlbumRepository.GetAll();
@@ -25,16 +25,16 @@ public class AlbumController : ControllerBase
        return Ok(albums);
     }
 
-    [HttpGet("",Name="GetAlbumByArtistID")]
-    public IActionResult GetAlbum(Artist artist)
+    [HttpGet("album/{artistId}",Name="GetAlbumByArtistID")]
+    public IActionResult GetAlbum(int? artistId)
     {
-        if(artist == null){
+        if(artistId == null){
             return BadRequest();
         }
-        return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id).Albums) ;
+        return Ok(_unitOfWork.ArtistRepository.GetById(artistId.Value).Albums) ;
     }
 
-    [HttpGet(Name="GetAlbumByName")]
+    [HttpGet("album/{albumName}",Name="GetAlbumByName")]
     public IActionResult GetAlbumByName(string albumName)
     {
         if(albumName == null){
@@ -43,7 +43,7 @@ public class AlbumController : ControllerBase
         return Ok(_unitOfWork.AlbumRepository.Find(x => x.Name == albumName)) ;
     }
 
-    [HttpGet(Name="GetSongsByAlbumId")]
+    [HttpGet("album/{id}/songs"Name="GetSongsByAlbumId")]
     public IActionResult GetSongsByAlbumId(long id)
     {
         var album = _unitOfWork.AlbumRepository.GetById(id);
@@ -51,7 +51,7 @@ public class AlbumController : ControllerBase
         return Ok(album.Songs);
     }
 
-    [HttpGet(Name="GetSongsByAlbumName")]
+    [HttpGet("/album/{name}/songs",Name="GetSongsByAlbumName")]
     public IActionResult GetSongsByAlbumId(string name)
     {
         var albums = _unitOfWork.AlbumRepository.Find(x => x.Name == name);
@@ -66,14 +66,14 @@ public class AlbumController : ControllerBase
         return Ok(songs);
     }
 
-    [HttpPost(Name="CreateAlbum")]
+    [HttpPost("/album",Name="CreateAlbum")]
     public IActionResult CreateAlbum(Album album)
     {
         if(album == null || _unitOfWork.AlbumRepository.ValidateAlbum(album) == false){
             return BadRequest();
         }
         
-        /*
+        
         var artist = album.Artist ;
         if(artist == null){
             artist = _unitOfWork.AlbumRepository.GetById(album.Id).Artist;
@@ -83,23 +83,22 @@ public class AlbumController : ControllerBase
         }
         artist.Albums.Add(album);
         _unitOfWork.Save();
-    */
-        //return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id).Albums) ;
-        return Ok();
+    
+        return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id).Albums) ;
     }
 
-    [HttpDelete(Name ="DeleteAlbum")]
-    public IActionResult DeleteAlbum(Album album)
+    [HttpDelete("/album/{id}",Name ="DeleteAlbum")]
+    public IActionResult DeleteAlbum(int? id)
     {
-        if(album == null){
+        if(id == null){
             return BadRequest();
         }
-        _unitOfWork.AlbumRepository.Remove(album);
+        _unitOfWork.AlbumRepository.Remove(_unitOfWork.AlbumRepository.GetById(id.Value));
         _unitOfWork.Save();
         return Ok() ;
     }
 
-    [HttpPut(Name ="UpdateAlbum")]
+    [HttpPut("/album",Name ="UpdateAlbum")]
     public IActionResult UpdateAlbum(Album album)
     {
         if(album == null || _unitOfWork.AlbumRepository.ValidateAlbum(album) == false){
@@ -109,7 +108,7 @@ public class AlbumController : ControllerBase
         if(albumToUpdate == null){
             return BadRequest();
         }
-        /*
+        
         albumToUpdate.Artist = album.Artist;
         albumToUpdate.YearRelease = album.YearRelease;
         albumToUpdate.Name = album.Name;
@@ -118,7 +117,7 @@ public class AlbumController : ControllerBase
         albumToUpdate.Created = album.Created;
         albumToUpdate.LastModified = System.DateTime.Now;
         _unitOfWork.Save();
-        */
+        
         return Ok(_unitOfWork.AlbumRepository.GetById(album.Id));
     }
 
