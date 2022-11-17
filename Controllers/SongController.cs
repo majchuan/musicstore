@@ -54,7 +54,7 @@ public class SongController : ControllerBase
         }
         album.Songs.Add(song);
         
-        _unitOfWork.SongRepository.Save();
+        _unitOfWork.Save();
 
         return Ok(_unitOfWork.SongRepository.Find(x => x.Name == song.Name)) ;
     }

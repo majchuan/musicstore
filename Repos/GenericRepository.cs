@@ -40,9 +40,4 @@ public class GenericRepository<T> : IGenericRepository<T>  where T: class
     {
         ac.Set<T>().RemoveRange(t);
     }
-
-    public void Save()
-    {
-        ac.SaveChanges();
-    }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj": {}
+    "J:\\VisualCodeWorkSpace\\musicstore_web_service\\musicstore\\MusicStore.csproj": {}
   },
   "projects": {
-    "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj": {
+    "J:\\VisualCodeWorkSpace\\musicstore_web_service\\musicstore\\MusicStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj",
+        "projectUniqueName": "J:\\VisualCodeWorkSpace\\musicstore_web_service\\musicstore\\MusicStore.csproj",
         "projectName": "MusicStore",
-        "projectPath": "J:\\VisualCodeWorkSpace\\musicstore\\MusicStore.csproj",
+        "projectPath": "J:\\VisualCodeWorkSpace\\musicstore_web_service\\musicstore\\MusicStore.csproj",
         "packagesPath": "C:\\Users\\majin\\.nuget\\packages\\",
-        "outputPath": "J:\\VisualCodeWorkSpace\\musicstore\\obj\\",
+        "outputPath": "J:\\VisualCodeWorkSpace\\musicstore_web_service\\musicstore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -58,6 +58,12 @@
               "version": "[7.0.0, )"
             },
             "microsoft.entityframeworkcore.sqlserver": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "microsoft.entityframeworkcore.tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.0, )"
             }
