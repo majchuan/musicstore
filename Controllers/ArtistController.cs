@@ -15,8 +15,8 @@ public class ArtistController : ControllerBase
         _unitOfWork = unitOfWork;
     }
 
-    [HttpGet(Name = "GetArtists")]
-    public IActionResult GetArtists()
+    [HttpGet("/artists",Name = "GetArtists")]
+    public IActionResult GetAll()
     {
         var artists = _unitOfWork.ArtistRepository.GetAll();
         if(artists == null){
@@ -25,7 +25,7 @@ public class ArtistController : ControllerBase
        return Ok(artists);
     }
 
-    [HttpGet(Name="GetArtist")]
+    [HttpGet("/artist/{id}",Name="GetArtist")]
     public IActionResult GetArtist(int? id)
     {
         if(id == null){
@@ -33,23 +33,25 @@ public class ArtistController : ControllerBase
         }
         return Ok(_unitOfWork.ArtistRepository.GetById(id.Value)) ;
     }
-
-    public IActionResult GetAblumsByArtist(Artist artist)
+    [HttpGet("/artist/{artistID}/albums", Name ="GetAlbumByArtist")]
+    public IActionResult GetAblumsByArtist(int? artistID)
     {
-        if(artist == null){
+        if(artistID == null){
             return BadRequest();
         }
-
-        return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id).Albums);
+        var albums = _unitOfWork.ArtistRepository.GetById(artistID.Value).Albums;
+        
+        return Ok(albums);
     }
 
-    public IActionResult GetSongsByArtist(Artist artist)
+    [HttpGet("/artist/{artistID}/songs", Name ="GetSongsByArtist")]
+    public IActionResult GetSongsByArtist(int? artistID)
     {
-        if(artist == null){
+        if(artistID == null){
             return BadRequest();
         }
 
-        var albums =_unitOfWork.ArtistRepository.GetById(artist.Id).Albums;
+        var albums =_unitOfWork.ArtistRepository.GetById(artistID.Value).Albums;
         var songs = new List<Song>();
         foreach(var album in albums)
         {
@@ -59,7 +61,7 @@ public class ArtistController : ControllerBase
         return Ok(songs);
     }
 
-    [HttpPost(Name="CreateArtist")]
+    [HttpPost("/artist",Name="CreateArtist")]
     public IActionResult CreateArtist(Artist artist)
     {
         if(_unitOfWork.ArtistRepository.ValidateArtist(artist)== false){
@@ -69,7 +71,8 @@ public class ArtistController : ControllerBase
         _unitOfWork.Save();
         return Ok(_unitOfWork.ArtistRepository.Find(x => x.Name == artist.Name)) ;
     }
-    [HttpDelete(Name="DeleteArtist")]
+
+    [HttpDelete("/artist/{id}",Name="DeleteArtist")]
     public IActionResult DeleteArtist(int? id)
     {
         if(id == null){
@@ -78,7 +81,8 @@ public class ArtistController : ControllerBase
         _unitOfWork.ArtistRepository.Remove(_unitOfWork.ArtistRepository.GetById(id.Value));
         return Ok() ;
     }
-    [HttpPut(Name="UpdateArtist")]
+
+    [HttpPut("/artist", Name="UpdateArtist")]
     public IActionResult UpdateArtist(Artist artist)
     {
         if(_unitOfWork.ArtistRepository.ValidateArtist(artist) == false){

@@ -154,3 +154,5 @@ J:\VisualCodeWorkSpace\musicstore_web_service\musicstore\obj\Debug\net6.0\scoped
 J:\VisualCodeWorkSpace\musicstore_web_service\musicstore\obj\Debug\net6.0\MusicStore.csproj.CopyComplete
 J:\VisualCodeWorkSpace\musicstore_web_service\musicstore\obj\Debug\net6.0\MusicStore.genruntimeconfig.cache
 J:\VisualCodeWorkSpace\musicstore_web_service\musicstore\obj\Debug\net6.0\ref\MusicStore.dll
+J:\VisualCodeWorkSpace\musicstore_web_service\musicstore\bin\Debug\net6.0\Castle.Core.dll
+J:\VisualCodeWorkSpace\musicstore_web_service\musicstore\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Proxies.dll

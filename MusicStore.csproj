@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="microsoft.entityframeworkcore" Version="7.0.0" />
+    <PackageReference Include="microsoft.entityframeworkcore.proxies" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="7.0.0" />
     <PackageReference Include="microsoft.entityframeworkcore.tools" Version="7.0.0">

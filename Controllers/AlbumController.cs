@@ -25,7 +25,7 @@ public class AlbumController : ControllerBase
        return Ok(albums);
     }
 
-    [HttpGet(Name="GetAlbumByArtist")]
+    [HttpGet("",Name="GetAlbumByArtistID")]
     public IActionResult GetAlbum(Artist artist)
     {
         if(artist == null){
@@ -72,7 +72,8 @@ public class AlbumController : ControllerBase
         if(album == null || _unitOfWork.AlbumRepository.ValidateAlbum(album) == false){
             return BadRequest();
         }
-
+        
+        /*
         var artist = album.Artist ;
         if(artist == null){
             artist = _unitOfWork.AlbumRepository.GetById(album.Id).Artist;
@@ -82,8 +83,9 @@ public class AlbumController : ControllerBase
         }
         artist.Albums.Add(album);
         _unitOfWork.Save();
-
-        return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id).Albums) ;
+    */
+        //return Ok(_unitOfWork.ArtistRepository.GetById(artist.Id).Albums) ;
+        return Ok();
     }
 
     [HttpDelete(Name ="DeleteAlbum")]
@@ -107,6 +109,7 @@ public class AlbumController : ControllerBase
         if(albumToUpdate == null){
             return BadRequest();
         }
+        /*
         albumToUpdate.Artist = album.Artist;
         albumToUpdate.YearRelease = album.YearRelease;
         albumToUpdate.Name = album.Name;
@@ -115,7 +118,7 @@ public class AlbumController : ControllerBase
         albumToUpdate.Created = album.Created;
         albumToUpdate.LastModified = System.DateTime.Now;
         _unitOfWork.Save();
-
+        */
         return Ok(_unitOfWork.AlbumRepository.GetById(album.Id));
     }
 
